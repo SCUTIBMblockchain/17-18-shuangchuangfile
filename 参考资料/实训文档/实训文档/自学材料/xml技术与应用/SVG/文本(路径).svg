@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" 
+  "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink">
+  <desc>Text on a path</desc>
+  <defs>
+     <path id="wavyPath" 
+         d="M75,100 c25,-75 50,50 100,0 s50,-50 150,50"/>
+  </defs>
+  <rect x="1" y="1" width="398" height="200"
+        fill="none" stroke="blue" />
+
+  <text x="50" y="50" font-size="14">
+     <textPath xlink:href="#wavyPath">
+       Text travels along any path that you define for it.
+     </textPath>
+  </text>
+
+</svg>

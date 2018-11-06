@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ages.xslt"?>
+	<Ages>
+		<Person name="Peter" age="21" />
+		<Person name="Angela" age="12" />
+		<Person name="Augustus" age="92" />
+		<Person name="George" age="44" />
+		<Person name="Hannah" age="30" />
+	</Ages>

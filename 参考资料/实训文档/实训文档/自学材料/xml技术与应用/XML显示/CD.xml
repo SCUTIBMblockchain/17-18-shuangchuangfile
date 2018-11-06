@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml-stylesheet type="text/css" href="CD.css"?>-->
+<newCD>
+	<CD>
+		<title>红蔷薇</title>
+		<songer>萧亚轩</songer>
+		<song>一个人的精彩</song>
+		<song>夜</song>
+	</CD>
+	<CD>
+	<title>天堂</title>
+		<songer>腾格尔</songer>
+		<song>天堂</song>
+		<song>蒙古人</song>
+	</CD>
+</newCD>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="foreach_sort.xslt"?>
+<Companies>
+    <Company>
+        <Name>Acme</Name>
+        <Person> 
+            <Name>Dave</Name>
+            <Phone>123</Phone>
+        </Person>
+        <Person>
+            <Name>Tina</Name>
+            <Phone>234</Phone>
+        </Person>
+        <Person>
+            <Name>Jerry</Name>
+        </Person>
+    </Company>
+</Companies>

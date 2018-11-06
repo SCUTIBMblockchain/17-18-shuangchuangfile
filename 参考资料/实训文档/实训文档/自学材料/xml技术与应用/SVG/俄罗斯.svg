@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-flat-20030114.dtd">
+<!--svg xmlns="http://www.w3.org/2000/svg" onload="onInit(evt)" onclick="addGraph();" onkeydown="doGraph(evt)" width="100%" height="100%" shape-rendering="optimizeSpeed" text-rendering="optimizeSpeed" xml:space="preserve"-->
+<svg xmlns="http://www.w3.org/2000/svg" onload="onInit(evt);"   onkeydown="doGraph(evt)"  width="100%" height="100%" shape-rendering="optimizeSpeed" text-rendering="optimizeSpeed" >
+<title>俄罗斯方块</title> 
+ <script type="text/ecmascript">
+  <![CDATA[  
+  var _svg     = null;    //SVG文档
+  var _bgs  = null;    //背景方块集
+  var _graph  = null;    //当前图形
+  var _dropTimer = null;
+  var _x   = 0;    //游戏区X坐标
+  var _y   = 0;    //游戏区Y坐标
+  var _width  = 0;    //窗口宽度
+  var _height  = 0;    //窗口高度
+  var _xs   = 10;    //游戏区横向方块数量
+  var _ys   = 20;    //游戏区纵向方块数量
+  var _size  = 30;    //方块边长  
+  var _amount  = 20;
+  var _i   = 0;
+  var _flys  = new Array();  
+  var grade;
+  function onInit(evt)
+  {
+   grade=0;
+   _svg = evt.getTarget().getOwnerDocument();
+    var node=_svg.getElementById("deletegrade")
+    node.childNodes.item(0).data=grade;
+   _width  = window.innerWidth;
+   _height = window.innerHeight;
+   _x  = parseInt((_width  - _xs * _size) / 2)
+   _y  = parseInt((_height - _ys * _size) / 2);
+   
+   var rectBg = _svg.getElementById("border");
+   
+   rectBg.setAttribute("x",  _x);
+   rectBg.setAttribute("y",  _y);   
+   rectBg.setAttribute("width",  _xs * _size);
+   rectBg.setAttribute("height", _ys * _size);
+      
+   for(var i=0; i<_ys; i++)
+   {
+    var line = _svg.createElement("line");
+    
+    line.setAttribute("x1", _x);
+    line.setAttribute("y1", _y + _size*i);
+    line.setAttribute("x2", _x + _size*_xs);
+    line.setAttribute("y2", _y + _size*i);
+    line.setAttribute("stroke", "black");
+   }
+   
+   for(var i=0; i<_xs; i++)
+   {
+    var line = _svg.createElement("line");
+    
+    line.setAttribute("x1", _x + _size*i);
+    line.setAttribute("y1", _y);
+    line.setAttribute("x2", _x + _size*i);
+    line.setAttribute("y2", _y + _size*_ys);
+    line.setAttribute("stroke", "black");
+    
+    _svg.getElementById("gLines").appendChild(line);
+   }
+   
+   _bgs = new BgRects();
+   _bgs.draw();
+   
+  
+   
+   var pad = _svg.createElement("rect");
+   pad.setAttribute("x",  0);
+   pad.setAttribute("y",  _height - 10);
+   pad.setAttribute("width", 50);
+   pad.setAttribute("height", 10);
+   
+   _svg.getElementById("gLines").appendChild(pad);      
+   
+
+  }  
+  
+  
+  function getSin(val)
+  {
+   return Math.sin(val * 3.1415927 * 2 /360);
+  }
+  
+  function getCos(val)
+  {
+   return Math.cos(val * 3.1415927 * 2 /360);
+  }
+
+  function Missile(iX, iY, sId)
+  {
+   var id    = sId; //ID
+   var speedLow  = 3;  //最低速度
+   var speedHigh = 10;  //最高速度
+   var speedStep = 5;  //速度变化步长
+   var speed   = 0;  //当前速度
+   var angle   = 0;  //当前角度()
+   var length    = 50;  //导弹长度 
+   var x    = iX;  //头部横标
+   var y    = iY;  //头部纵标
+  
+   function _create()
+   {    
+    var graph = _svg.createElement("line");
+    
+    graph.setAttribute("id",  id);
+    graph.setAttribute("x1",  x);
+    graph.setAttribute("y1",  y);
+    graph.setAttribute("x2",  x - getSin(angle) * length);
+    graph.setAttribute("y2",  y + getCos(angle) * length);
+    graph.setAttribute("stroke", "blue");
+    graph.setAttribute("stroke-width", 3);
+    
+    _svg.getElementById("gFly").appendChild(graph);
+   }
+   
+   function _move()
+   {    
+    var graph = _svg.getElementById(id);    
+    var step  = 0;
+    
+    if(_graph!=null)
+    {
+    var tx = (_graph.X + _graph.getMatrix()[0].length/2)  * _size +  _x;
+    var ty = (_graph.Y + _graph.getMatrix().length/2) * _size + _y;
+    var iAngle = 180-Math.atan2(tx-x,ty-y) /(3.1415926*2/360);
+    var step = (iAngle-angle)%360;
+    step = step<360 ? step : step-360;
+    }    
+    
+    speedStep += Math.abs(step) > 30 ? -0.03 : 0.1;
+    speedStep = speedStep > speedHigh ? speedHigh : speedStep;
+    speedStep = speedStep < speedLow ? speedLow : speedStep;
+    if(step==0)
+     angle += Math.random()-0.5;
+    else
+     angle += (step > 0 ? 1 :-1) + (Math.random()-0.5);
+    x += getSin(angle) * speedStep;    
+    y -= getCos(angle) * speedStep;
+    
+      
+    graph.setAttribute("x1", x);
+    graph.setAttribute("y1", y);
+    graph.setAttribute("x2", x - getSin(angle) * length);
+    graph.setAttribute("y2", y + getCos(angle) * length);
+   
+    setTimeout("onFlyMove('" + id +"')", 1);    
+   }
+   
+   this.move = _move;
+   
+  }
+
+  function onFlyMove(id)
+  {   
+   _flys[id].move();
+  }
+  
+  function Ball(x, y)
+  {   
+   var circle = null;
+   var stepX  = 1;
+   var stepY  = 1;
+   var r    = 200;  
+   
+
+   
+   function _move()
+   {       
+   /* var x = parseInt(circle.getAttribute("cx"));
+    var y = parseInt(circle.getAttribute("cy"));
+   
+    if(x<r || x>_width  -r) stepX = -stepX;    
+    if(y<r || y>_height -r) stepY = -stepY;
+    
+    circle.setAttribute("cx", x + stepX);
+    circle.setAttribute("cy", y + stepY);    
+    
+    setTimeout("moveBall()", 20);*/
+   }
+   
+   this.Move = _move;
+      
+   _create();
+  }
+  
+  function moveBall()
+  {
+   //_ball1.Move();   
+  }
+  
+  function BgRects()
+  {
+   var lines  = null;    //方块行集合
+   
+   function _initialize()
+   {
+    lines = new Array();
+    
+    for(var m=0; m<_ys; m++)
+    {
+     lines[m] = new Array();
+    
+     for(var n=0; n<_xs; n++)
+     {
+      if(m>18 && (Math.random() < 0.5))
+      {
+       lines[m][n] = true;
+      }
+      else
+      {
+       lines[m][n] = false;
+      }
+     }
+    }
+   }
+   
+   function _mergeGraph(g)
+   {
+    var matrix = g.getMatrix();
+    
+    for(var m=0; m<matrix.length; m++)
+    {
+     for(var n=0; n<matrix[0].length; n++)
+     {
+      lines[m+g.Y][n+g.X] = matrix[m][n] || lines[m+g.Y][n+g.X];      
+     }
+    }
+    
+    _draw();
+   }
+   
+   function _clearUp(g)
+   {  
+ 
+    //清除空行 
+    for(var m=lines.length-1; m>-1; m--)
+    {
+     var isClear = true;
+     
+     //判断是否空行
+     for(var n=0; n<lines[0].length; n++)
+     {
+      isClear = isClear && lines[m][n];
+     }
+     
+     //清除空行
+     if(isClear)
+     {
+      for(var n=0; n<lines[0].length; n++)
+      {
+       lines[m][n] = false;       
+      }
+      
+      _draw();
+     }
+     
+     //填补空行
+     if(isClear)
+     {
+      for(var i=m-1; i>-1; i--)
+      { 
+       for(var n=0; n<lines[0].length; n++)
+       {
+        lines[i+1][n] = lines[i][n];        
+       }
+      }
+       grade=grade+10;
+        var node=_svg.getElementById("deletegrade")
+    node.childNodes.item(0).data=grade;
+      m++;
+      _draw();
+    
+     }
+    }    
+   }
+   
+   function _draw()
+   {   
+    var rects = _svg.getElementById("gBgs");
+    
+    while(rects.hasChildNodes())
+    {
+     rects.removeChild(rects.firstChild);
+    }    
+    
+    for(var m=0; m<lines.length; m++)
+    {    
+     for(var n=0; n<lines[m].length; n++)
+     {
+      if(lines[m][n])
+      {
+       var rect = _svg.createElement("rect");
+       
+       rect.setAttribute("x",  _size * n + _x);
+       rect.setAttribute("y",  _size * m + _y);
+       rect.setAttribute("width", _size);
+       rect.setAttribute("height", _size);
+       rect.setAttribute("stroke", "black");
+       rect.setAttribute("fill", "#99ffcc");
+       rect.setAttribute("stroke-solid", "1");
+       
+       rects.appendChild(rect);
+      }
+     }
+    }
+   }
+   
+   function _getLines()
+   {
+    return lines.length;
+   }
+   
+   function _testHit(x, y, matrix)
+   {
+    var result = false;
+   
+    if(x<0 || x>lines[0].length-matrix[0].length)
+    {
+     return result;
+    }
+    
+    for(var m=0; m<matrix.length; m++)
+    {
+     for(var n=0; n<matrix[0].length; n++)
+     {
+      try
+      {
+       result = result || (lines[m+y][n+x] && matrix[m][n]);
+      }
+      catch(e)
+      {
+       result = true;
+      }
+     }
+    }
+    
+    return !result;
+   }
+   
+   this.draw  = _draw;
+   this.getLines = _getLines;
+   this.testHit = _testHit;
+   this.mergeGraph = _mergeGraph;
+   this.clearUp = _clearUp;
+   
+   _initialize();
+  }
+      
+  function Graph(type)
+  {   
+   this.X  = parseInt(_xs/2-1);
+   this.Y  = 0;
+   var matrix  = null;   
+   var timer = null;
+   
+   function _create()
+   {    
+    matrix = new Array();    
+    
+    //1:一点 2:一竖 3:方块 4:T字 5:L字 6:反L字 7:Z字 8:反Z字
+    switch(type)
+    {
+     case 1:      
+      matrix[0]   = new Array();
+      matrix[0][0] = true;
+      break;
+     case 2:
+      matrix[0]   = new Array();
+      matrix[1]   = new Array();
+      matrix[2]   = new Array();
+      matrix[3]   = new Array();
+      matrix[0][0] = true;
+      matrix[1][0] = true;
+      matrix[2][0] = true;
+      matrix[3][0] = true;
+      break;
+     case 3:
+      matrix[0]   = new Array();
+      matrix[1]   = new Array();      
+      matrix[0][0] = true;
+      matrix[0][1] = true;
+      matrix[1][0] = true;
+      matrix[1][1] = true;
+      break;
+     case 4:
+      matrix[0]   = new Array();
+      matrix[1]   = new Array();       
+      matrix[0][0] = false;
+      matrix[0][1] = true;
+      matrix[0][2] = false;      
+      matrix[1][0] = true;
+      matrix[1][1] = true;
+      matrix[1][2] = true;
+      break;
+     case 5:
+      matrix[0]   = new Array();
+      matrix[1]   = new Array();       
+      matrix[2]   = new Array();       
+      matrix[0][0] = true;
+      matrix[0][1] = false;
+      matrix[1][0] = true;
+      matrix[1][1] = false;
+      matrix[2][0] = true;
+      matrix[2][1] = true;
+      break;
+     case 6:
+      matrix[0]   = new Array();
+      matrix[1]   = new Array();       
+      matrix[2]   = new Array();       
+      matrix[0][0] = false;
+      matrix[0][1] = true;
+      matrix[1][0] = false;
+      matrix[1][1] = true;
+      matrix[2][0] = true;
+      matrix[2][1] = true;
+      break;
+     case 7:
+      matrix[0]   = new Array();
+      matrix[1]   = new Array();       
+      matrix[2]   = new Array();       
+      matrix[0][0] = false;
+      matrix[0][1] = true;
+      matrix[1][0] = true;
+      matrix[1][1] = true;
+      matrix[2][0] = true;
+      matrix[2][1] = false;
+      break;
+     case 8:
+      matrix[0]   = new Array();
+      matrix[1]   = new Array();       
+      matrix[2]   = new Array();       
+      matrix[0][0] = true;
+      matrix[0][1] = false;
+      matrix[1][0] = true;
+      matrix[1][1] = true;
+      matrix[2][0] = true;
+      matrix[2][1] = false;
+      break;
+     case 9:
+      matrix[0]   = new Array();
+      matrix[1]   = new Array();             
+      matrix[0][0] = true;
+      matrix[0][1] = false;
+      matrix[1][0] = true;
+      matrix[1][1] = true;      
+      break;
+    }    
+   }
+   
+   function _show()
+   {
+    var rects = _svg.getElementById("gRects");
+    
+    while(rects.hasChildNodes())
+    {
+     rects.removeChild(rects.firstChild);
+    }    
+       
+    for(var m=0; m<matrix.length; m++)
+    {
+     for(var n=0; n<matrix[m].length; n++)
+     {
+      if(matrix[m][n])
+      {
+       var rect = _svg.createElement("rect");
+       
+       rect.setAttribute("x",  _size * (n + this.X) + _x);
+       rect.setAttribute("y",  _size * (m + this.Y) + _y);
+       rect.setAttribute("width", _size);
+       rect.setAttribute("height", _size);       
+       rect.setAttribute("fill", "yellow");
+       rect.setAttribute("stroke", "black");
+       rect.setAttribute("stroke-solid", "1");
+       
+       rects.appendChild(rect);       
+      }
+     }
+    }    
+   }
+   
+   function _move(direct)
+   {
+    alert(direct);
+   }
+   
+   function _drop()
+   {        
+    if(_bgs.testHit(this.X, this.Y+1, _getMatrix()))
+    {
+     this.Y++;
+     setTimeout("dropGraph()", 500);
+    }
+    else
+    {
+     setTimeout("countineGraph()", 1);
+    }
+    
+    this.show();
+   }
+   
+   function _getRotate()
+   {
+    var ms = new Array();
+    var ys = matrix.length;
+    var xs = matrix[0].length;    
+   
+    for(var m=0; m<xs; m++)
+    {
+     ms[m] = new Array();
+     for(var n=0; n<ys; n++)
+     {
+      ms[m][n] = matrix[n][xs-m-1];
+     }
+    }   
+    
+    return ms;
+   }
+   
+   function _rotate()
+   {        
+    matrix = _getRotate();
+   }
+   
+   function _getMatrix()
+   {
+    return matrix;
+   }  
+      
+   this.getMatrix = _getMatrix;
+   this.show  = _show;
+   this.move  = _move;
+   this.drop  = _drop;
+   this.rotate  = _rotate;   
+   this.getRotate = _getRotate;   
+   
+   _create();
+  }
+  
+  //添加随机图形
+ /* function addGraph()
+  {
+   if(_graph == null)
+   {
+    //一点、一竖、方块、T字、L字、反L字、十字、Z字、反Z字
+    var type = parseInt(Math.random() * 9 + 1);
+    
+    _graph = new Graph(type);
+    _graph.show();
+    _graph.drop();
+   } 
+   else{
+  
+  var rects = _svg.getElementById("gRects");
+    
+    while(rects.hasChildNodes())
+    {
+     rects.removeChild(rects.firstChild);
+    }   
+      
+       var rects = _svg.getElementById("gBgs");
+        while(rects.hasChildNodes())
+    {
+     rects.removeChild(rects.firstChild);
+    }    
+  _bgs.clearUp(_graph);
+  this.X  = parseInt(_xs/2-1);
+   this.Y  = 0;
+   var matrix  = null;   
+   var timer = null;
+   var lines=null;
+   _graph == null
+   onInit(evt)
+   addGraph()
+   }
+  }*/
+  
+  function addGraph()
+  {
+   if(_graph == null){
+    //一点、一竖、方块、T字、L字、反L字、十字、Z字、反Z字
+    var type = parseInt(Math.random() * 9 + 1);
+    
+    _graph = new Graph(type);
+    _graph.show();
+    _graph.drop();
+    }
+   }
+   function beginagin()
+   {
+    
+    var rects = _svg.getElementById("gRects");
+   //  alert(printNode( _svg.getElementById("gRects")))
+    if(rects.hasChildNodes())
+    {
+     rects.removeChild(rects.firstChild);
+      
+     
+   
+  _bgs.clearUp(_graph);
+  this.X  = parseInt(_xs/2-1);
+   this.Y  = 0;
+   var matrix  = null;   
+   var timer = null;
+   var lines=null;
+   _graph = null
+   addGraph()
+   onInit(evt)
+   
+    } else{
+    addGraph()
+    }
+   }
+  //合并背景方块并消行，并继续新方块
+  function countineGraph()
+  {
+  if(_graph.Y<=1){
+   alert("输了");
+    return;
+  }
+   _bgs.mergeGraph(_graph);
+   _bgs.clearUp(_graph);
+   _graph = null;
+   addGraph();
+   
+  }
+  
+  function dropGraph()
+  {
+   _graph.drop();
+  }
+  
+  function downGraph()
+  {   
+   if(_graph != null)
+   {
+    if(_bgs.testHit(_graph.X, _graph.Y+1, _graph.getMatrix()))
+    {
+     _graph.Y += 1;
+     _graph.show();
+    }
+   }else{
+     _graph.Y=18
+   }
+  }
+  
+  function rotateGraph()
+  {
+   if(_graph != null)
+   {
+    if(_bgs.testHit(_graph.X, _graph.Y, _graph.getRotate()))    
+    {
+     _graph.rotate();    
+     _graph.show();
+    }
+   }
+  }
+  
+  function moveGraph(n)
+  {   
+   if(_graph != null)
+   {
+    if(_bgs.testHit(_graph.X+n, _graph.Y, _graph.getMatrix()))
+    {
+     _graph.X += n;
+     _graph.show();
+    }
+   }
+  }
+  
+  function doGraph(evt)
+  {
+   switch(evt.getKeyCode())
+   {
+    case 32: //开始或旋转
+     if(_graph == null)
+      addGraph();
+     else
+      rotateGraph();
+     break;
+    case 38:
+     if(_graph != null)
+      rotateGraph();
+     break;
+    case 37: //左
+     moveGraph(-1);
+     break;
+    case 39: //右
+     moveGraph(1);
+     break;
+    case 40: //落下
+     downGraph();
+     break;
+   }
+  }  
+
+  ]]>
+ </script>
+ 	<defs>
+	<radialGradient id="rg" cx="4cm" cy="3cm" r="3cm">
+	<stop offset="60%" stop-color="yellow"/>
+	<stop offset="80%" stop-color="blue"/>
+	<stop offset="100%" stop-color="red"/>
+	</radialGradient>
+	</defs>
+ <rect id="rectBg"  x="0" y="0" width="100%" height="100%" fill="#E2F3FC" stroke="none"></rect> 
+ <g id="gLines">  
+ </g>
+ <g id="gBorder">
+  <rect id="border" x="0" y="0" width="0" height="0" opacity="0.95" fill="#cccccc" stroke="black" stroke-width="1"></rect>
+ </g> 
+ <g id="gBgs">  
+ </g> 
+ <g id="gRects">   
+ </g> 
+ <g id="gFly">
+ </g>
+
+  <g id="reset" onclick="beginagin();">
+  <rect width="80" height="30" x="700" y="550" style="fill:url(#rg)" />
+  <text x="723" y="573" font-size="16" >开始</text>
+  </g>
+  <g>
+  <rect x="690" y="450" width="100" height="30" fill="white" stroke="black"/>
+  <text id="deletegrade" x="692" y="470" font-size="16">0</text>
+  </g>
+</svg>

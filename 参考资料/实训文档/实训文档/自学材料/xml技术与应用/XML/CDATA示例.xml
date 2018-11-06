@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="gb2312"?>
+  <tests>
+    <test1>这是测试CDATA节的例子</test1>
+    <![CDATA[以下是一段JSP程序！
+       <% page contentType="text/html;charset=GB2312"%>
+       <% page language="java" %>...
+    ]]>
+  <test2>测试示例结束</test2>
+</tests>

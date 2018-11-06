@@ -1,0 +1,19 @@
+﻿<html>
+	<head>
+		<title>数据岛对象</title>
+		<script language="vbscript">
+			 sub show_onclick()
+			  t1.value=stock.tagname
+			  t2.value=stock.text
+			  t3.value=stock.url
+			 end sub
+		</script>
+	</head>
+	<body>
+		<xml id="stock" src="stockholder.xml"></xml>
+		<p>tagname的值：<input type=text size="10" name="t1"></p>
+		<p>text的值：<input type=text size="50" name="t2"></p>
+		<p>url的值：<input type=text size="50" name="t3"></p>
+		<p><input type="button" value="数据岛演示" name="show"></p>
+	</body> 
+</html>

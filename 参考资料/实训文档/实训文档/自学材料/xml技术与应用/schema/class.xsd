@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.scut.edu.cn"
+	xmlns="http://www.scut.edu.cn"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+	<xs:element name="class">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="student" type="StudentType"  minOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="StudentType">
+		<xs:sequence>
+				<xs:element name="name" type="xs:string" />
+				<xs:element name="age" type="xs:integer" />
+				<xs:element name="email" type="xs:string" minOccurs="1"/>
+				<xs:element name="height" type="xs:double" minOccurs="0" maxOccurs="1" />
+				<xs:element name="telephone" type="TelephoneType" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="mobile" type="MobileType" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="company" type="CompanyType"/>
+		</xs:sequence>
+		<xs:attribute name="StudentID" type="StudentIDType" id="yes"/>
+	</xs:complexType>
+	<xs:simpleType name="StudentIDType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="B[0-9]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TelephoneType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(0[0-9]{2})[0-9]{8}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[1-9][0-9]{10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="CompanyType" mixed="true">
+		<xs:sequence>
+			<xs:element name="address" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="zipcode" type="ZipcodeType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ZipcodeType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[1-9][0-9]{5}"/>
+		</xs:restriction>
+	</xs:simpleType>	
+</xs:schema>

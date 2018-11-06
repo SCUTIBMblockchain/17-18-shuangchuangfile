@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" 
+  "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="4cm" height="4cm" viewBox="0 0 400 400"
+     xmlns="http://www.w3.org/2000/svg">
+  <desc>Curved paths</desc>
+  <rect x="1" y="1" width="100%" height="100%" viewBox="0 0 1024 768"
+        fill="none" stroke="blue" />
+
+  <!-- First row -->
+  <text x="25" y="30">Large arc flag=1</text>
+  <text x="25" y="45">Sweep flag=0</text>
+  <text x="25" y="60">Rotation=0</text>
+  <path d="M75,100 a50,25 0 1,0 50,25"
+        stroke="blue" stroke-width="5" fill="none" />
+
+  <text x="150" y="30">Large arc flag=1</text>
+  <text x="150" y="45">Sweep flag=1</text>
+  <text x="150" y="60">Rotation=0</text> 
+  <path d="M150,100 a50,25 0 1,1 50,25"
+        stroke="blue" stroke-width="5" fill="none" />
+  
+  <text x="275" y="30">Large arc flag=1</text>
+  <text x="275" y="45">Sweep flag=1</text>
+  <text x="275" y="60">Rotation=-45</text> 
+  <path d="M275,100 a50,25 -45 1,1 50,25"
+        stroke="blue" stroke-width="5" fill="none" />        
+  
+  <!-- Second row -->
+  
+  <text x="100" y="170">Large arc flag=0</text>
+  <text x="100" y="185">Sweep flag=1</text>
+  <text x="100" y="200">Rotation=0</text> 
+  <path d="M100,225 a50,25 0 0,1 50,25"
+        stroke="blue" stroke-width="5" fill="none" />
+  
+  <text x="225" y="170">Large arc flag=0</text>
+  <text x="225" y="185">Sweep flag=0</text>
+  <text x="225" y="200">Rotation=0</text> 
+  <path d="M225,225 a50,25 0 0,0 50,25"
+        stroke="blue" stroke-width="5" fill="none" />                        
+</svg>

@@ -1,0 +1,29 @@
+﻿CD{
+	display:block;
+	}
+title{
+	display:block;
+	color:#0066cc;
+	font-family:宋体;
+	font-size:24pt;
+	font-weight:bold;
+	text-align:center;
+	}
+songer{
+	display:block;
+	font-family:黑体,Arial,Tahoma;
+	color:coral;
+	font-size:16pt;
+	font-weight:bold;
+	text-align:center;
+	}
+song{
+	display:block;
+	color:#000000;
+	text-indent:2cm;
+	font-family:宋体;
+	font-size:14pt;
+	font-height:1.5cm;
+	margin-left:10%
+	margin-right:15%;
+}

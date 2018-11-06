@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<?xml-stylesheet type="text/css" href="test.css" title="CSS TEST" ?>
+<document>
+    <title>The Discourses</title>
+    <philosopher>Epictetus</philosopher>
+    <book>Book Four</book>
+    <paragraph>
+        He is free
+    </paragraph>
+    <paragraph>
+        Do we then find any of the bad free from sorrow
+    </paragraph>
+</document>

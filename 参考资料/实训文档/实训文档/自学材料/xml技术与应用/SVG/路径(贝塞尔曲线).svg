@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" 
+  "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="4cm" height="4cm" viewBox="0 0 400 400"
+     xmlns="http://www.w3.org/2000/svg">
+  <desc>Curved paths</desc>
+  <rect x="1" y="1" width="398" height="300"
+        fill="none" stroke="blue" />
+
+  <!-- First row -->
+  <path d="M75,100 c25,-75 50,50 100,0 s50,-50 150,50"
+        stroke="blue" stroke-width="5" fill="none" />
+
+  <circle cx="175" cy="100" r="5" fill="red" />
+  <circle cx="75" cy="100" r="5" fill="red" />
+  <circle cx="325" cy="150" r="5" fill="red" />
+  
+  <path d="M75,225 q25,-75 100,0 t150,50"
+        stroke="blue" stroke-width="5" fill="none" />
+                   
+  <circle cx="175" cy="225" r="5" fill="red" />
+  <circle cx="75" cy="225" r="5" fill="red" />
+  <circle cx="325" cy="275" r="5" fill="red" />
+  
+</svg>

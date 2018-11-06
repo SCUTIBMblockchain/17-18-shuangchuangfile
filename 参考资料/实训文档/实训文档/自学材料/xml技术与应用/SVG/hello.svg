@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg id="root" xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 100 10" onload="init(evt)">
+	<title>KSVG-Slide</title>
+	<desc>KSVG-Slide</desc>
+	<defs>
+		<radialGradient id="radgral">
+			<stop offset="0%" style="stop-color:rgb(255,255,255)"/>
+			<stop offset="100%" style="stop-color:rgb(0,0,255)"/>
+		</radialGradient>
+	</defs>
+	<text x="20" y="30" style="fill:rgb(0,0,0);font-size:24"> Hello World! </text>
+	<rect x="20" y="60" width="200" height="40" style="fill:url(#radgral)"/>
+	<script type="text/javascript"><![CDATA[function init(evt){alert('Hello World!');}]]></script>
+</svg>

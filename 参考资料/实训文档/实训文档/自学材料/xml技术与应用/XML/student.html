@@ -1,0 +1,26 @@
+<html>
+		<head>
+			<script language="JavaScript" for="window" event="onload">
+				var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+				xmlDoc.async="false";
+				xmlDoc.load("student.xml");
+				nodes = xmlDoc.documentElement.childNodes;
+				username.innerText = nodes.item(0).text;
+				date.innerText = nodes.item(1).text;
+				email.innerText = nodes.item(2).text;
+				address.innerText = nodes.item(3).text;
+			</script>
+			<title>在HTML中调用XML数据</title>
+		</head>
+		<body bgcolor="#FFFFFF">
+			显示某个学生的信息：<p>
+			<b>姓名：</b>
+			<span id="username"> </span> <p>
+			<b>生日：</b>
+			<span id="date"></span> <p>
+			<b>信箱：</b>
+			<span id="email"></span> <p>
+			<b>地址：</b>
+			<span id="address"></span>
+		</body><br><br>
+	</html><br><br>

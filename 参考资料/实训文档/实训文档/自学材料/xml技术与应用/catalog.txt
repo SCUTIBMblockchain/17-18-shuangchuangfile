@@ -1,0 +1,20 @@
+ 驱动器 C 中的卷是 System
+ 卷的序列号是 F28B-9E4B
+
+ C:\Users\Huangxb\Documents\Teaching\IBM精品课程建设\二次考核上交文档\Java EE开发实训学生资料包\自学材料\xml技术与应用 的目录
+
+2011/02/22  17:21           164,864 lecture01 XML相关基本概念.ppt
+2011/03/01  17:03           628,224 lecture02 XML基本语法.ppt
+2011/03/07  23:16           269,312 lecture03 XML的DTD.ppt
+2011/04/25  09:07           450,048 lecture04 XML Schema.ppt
+2011/03/21  21:13           193,536 lecture05 XML数据处理技术(XPATH).ppt
+2011/03/22  16:19           268,288 lecture06 XML数据处理技术(XSLT) .ppt
+2011/04/12  09:30           337,408 lecture07 XML编程(DOM).ppt
+2011/03/27  17:41           124,416 lecture08 XML编程(SAX).ppt
+2011/04/12  18:24           732,160 lecture09 XML显示技术(CSS).ppt
+2011/04/18  23:14            87,040 lecture10 XML数据岛.ppt
+2011/04/19  11:38           149,504 lecture11 SVG简介 .ppt
+2011/03/11  01:30         3,263,488 补充HTML基础.ppt
+2011/02/22  17:13            40,960 课程介绍.ppt
+              13 个文件      6,709,248 字节
+               0 个目录  2,276,769,792 可用字节

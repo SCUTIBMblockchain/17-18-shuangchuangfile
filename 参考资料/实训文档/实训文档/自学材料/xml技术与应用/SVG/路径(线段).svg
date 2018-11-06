@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" 
+  "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="400" height="400"
+     xmlns="http://www.w3.org/2000/svg">
+  <desc>A simple path</desc>
+  <rect x="1" y="1" width="350" height="350"
+        fill="none" stroke="blue" />
+  <path d="M 100 100 L 300 50 L 300 250 L 100 300 Z"
+        fill="red" stroke="blue" stroke-width="3" />
+</svg>

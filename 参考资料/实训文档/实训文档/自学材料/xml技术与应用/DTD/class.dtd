@@ -1,0 +1,16 @@
+﻿<!ELEMENT 班级 (简介,学生+)>
+<!ELEMENT 简介 (#PCDATA)>
+<!ELEMENT 学生 (姓名,年龄,电子邮箱*,身高,(电话|手机),单位)>
+<!ELEMENT 姓名 (#PCDATA)>
+<!ELEMENT 年龄 (#PCDATA)>
+<!ELEMENT 电子邮箱 (#PCDATA)>
+<!ELEMENT 身高 (#PCDATA)>
+<!ELEMENT 电话 (#PCDATA)>
+<!ELEMENT 手机 (#PCDATA)>
+<!ELEMENT 单位 (#PCDATA)>
+<!ELEMENT 单位 (地址,邮编)>
+<!ELEMENT 地址 (#PCDATA)>
+<!ELEMENT 邮编 (#PCDATA)>
+<!ATTLIST 学生 编号 ID #REQUIRED>
+<!ENTITY 介绍 SYSTEM "introduction.txt">
+

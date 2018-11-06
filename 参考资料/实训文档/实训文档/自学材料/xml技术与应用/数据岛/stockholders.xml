@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+	<stockholders>	
+		<stockholder id="A001">
+			<name>张祥</name>
+			<A600000>10000</A600000>
+			<A600739>8000</A600739>
+			<A000988>15000</A000988>
+			<A500018>6000</A500018>
+		</stockholder>
+		<stockholder id="A002">
+			<name>刘祥</name>
+			<A600000>10000</A600000>
+			<A600739>8000</A600739>
+			<A000988>15000</A000988>
+			<A500018>6000</A500018>
+		</stockholder>
+	</stockholders>

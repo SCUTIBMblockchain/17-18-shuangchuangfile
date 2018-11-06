@@ -1,0 +1,40 @@
+﻿<HTML>
+	<HEAD>
+		<script language="Javascript">
+			
+			function transformXml(thisform){
+			  var oXmlDom = new ActiveXObject("Msxml2.DOMDocument.3.0");
+			  oXmlDom.async = false;
+			  oXmlDom.load(thisform.text1.value);
+			  
+			  var oXslDom = new ActiveXObject("Msxml2.DOMDocument.3.0");
+			  oXslDom.async = false;
+			  oXslDom.load(thisform.text2.value);
+			  
+			  result=oXmlDom.transformNode(oXslDom); 
+	
+			  var oDIV = document.getElementById('message');
+			  strMessage="创建"+thisform.text1.value+"子元素成功！"+"\n";
+			  oDIV.innerHTML=strMessage;
+			  
+			  var xml = document.createTextNode(result);
+        oDIV.appendChild(xml); 
+
+     }
+     
+		</script>
+		
+	</HEAD>
+	<BODY>
+		<CENTER>
+			<H2>动态转换XML文档</H2><HR>
+				<form id="XMLFILE">
+					请输入需转换的XML文档名:<INPUT	NAME="text1" TYPE="TEXT"><BR>
+					请输入转换规则的文档名:<INPUT	NAME="text2" TYPE="TEXT">
+					<BR><BR>
+					<INPUT type="BUTTON" value="转换" onclick="transformXml(this.form)">
+				</form>
+		</CENTER>
+		<FONT COLOR="RED"><DIV id="message"></DIV></FONT>
+	</BODY>
+</HTML>

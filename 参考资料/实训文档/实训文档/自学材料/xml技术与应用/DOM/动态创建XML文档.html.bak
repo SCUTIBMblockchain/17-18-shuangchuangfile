@@ -1,0 +1,75 @@
+﻿<HTML>
+	<HEAD>
+		<script language="Javascript">
+			
+			function createXMLFile(thisform){
+			  var oXmlDom = new ActiveXObject("Microsoft.XMLDOM");
+			  oXmlDom.async = false;
+			  
+			  strMessage="";
+			  fileName=thisform.text2.value;
+			  
+			  oXmlDom.loadXML("<?xml version='1.0'?><root>动态创建XML文档</root>");
+ 				//oXmlDom.save("fileName");
+ 				//保存xml，不能在IE浏览器使用方法
+ 				node=oXmlDom.documentElement;
+ 				
+ 				str=buildtree(node,strMessage,0,0);
+ 				
+ 				var oDIV = document.getElementById('message');
+			  strMessage="创建"+thisform.text2.value+"成功！"+"<BR>"+str;
+			  oDIV.innerHTML=strMessage;
+			  
+			 
+     }
+     
+     function buildtree(node,str,level,space)
+		{
+			var n_name=node.nodeName;
+			var children=node.childNodes.length;
+			var s1="";
+			if(level==0){
+				str=str+n_name;
+			}
+			else{
+				if(node.firstChild==null)
+				str=str+"<BR>┣"+n_name;
+				else{
+				space=space+1;
+				for(var j=0;j<space;j++)
+					s1=s1+"&nbsp;&nbsp;&nbsp";
+				str=str+"<BR>"+s1+"┣"+n_name;
+				}
+			}
+			var i;
+			var nodetext;
+			if(children !=0){
+			for (i=0; i<children;i++){
+				nodetext=node.childNodes.item(i).text;
+				if(node.childNodes.item(i).nodeName=="#text"){
+		
+					str=str+"━"+nodetext+"<BR>"+s1+"┃";
+				}	
+				else{
+					
+					str=buildtree(node.childNodes.item(i),str,1,space);
+				}
+			}
+			}
+		return(str);
+	}     
+		</script>
+		
+	</HEAD>
+	<BODY>
+		<CENTER>
+			<H2>动态创建XML文档</H2><HR>
+				<form id="XMLFILE">
+					请输入需创建的XML文件名:<INPUT	NAME="text2" TYPE="TEXT">
+					<BR><BR>
+					<INPUT type="BUTTON" value="创建的XML文件" onclick="createXMLFile(this.form)">
+				</form>
+		</CENTER>
+		<FONT COLOR="RED"><DIV id="message"></DIV></FONT>
+	</BODY>
+</HTML>

@@ -1,0 +1,21 @@
+﻿<html>
+	<head>
+		<title>数据岛对象</title>
+		<script language="vbscript">
+		 sub show_onclick()
+		  t1.value=stock.documentElement.tagname
+		  t2.value=stock.documentElement.text
+		  t4.value=stock.documentElement.childNodes.item(0).Attributes.item(0).nodename
+		  t5.value=stock.documentElement.childNodes.item(0).Attributes.item(0).Text
+		 end sub
+		</script>
+	</head>
+	<body>
+		 <xml id="stock" src="stockholders.xml"></xml>
+		 <p>根元素的tagname值：<input type=text size="10" name="t1"></p>
+		 <p>根元素的text值：<input type=text size="60" name="t2"></p>
+		 <p>根元素第一个子元素的属性名：<input type=text size="20" name="t4"><BR>
+		    根元素第一个子元素的属性值：<input type=text size="20" name="t5"></p>
+		 <P><input type="button" value="数据岛演示" name="show"></p>
+	</body> 
+</html>

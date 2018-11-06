@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-flat-20030114.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+	<desc>
+		<!-- put a description here -->
+	</desc>
+	<defs>
+      <marker id="myStartArrow" overflow="visible" orient="auto">
+			<polyline stroke="black" fill="black" points="0,0 5,-2.5 5,2.5"/>
+		</marker>
+		<marker id="myEndArrow" overflow="visible" orient="auto">
+			<polyline stroke="black" fill="black" points="0,0 -5,-2.5 -5,2.5"/>
+		</marker> 
+		<marker id="myStartArrow1" overflow="visible" orient="auto">
+			<polyline stroke="red" fill="red" points="0,0 5,-2.5 5,2.5"/>
+		</marker>
+		<marker id="myEndArrow1" overflow="visible" orient="auto">
+			<polyline stroke="red" fill="red" points="0,0 -5,-2.5 -5,2.5"/>
+		</marker> 
+		<symbol id="hint1" fill="yellow">
+       	<rect id="rectHint" width="85" height="40" rx="5" ry="5" x="50" y="60" stroke="red" fill="yellow"/>
+       	<rect width="10" height="6" stroke="none" fill="yellow" x="60" y="95"/>
+       	<path d="M 60 100 40 130 70 100"  stroke="red" fill="yellow"/>
+       	</symbol>	
+       	<symbol id="hint2">
+       	<rect width="114" height="38" rx="5" ry="5" x="50" y="60" stroke="red" fill="yellow"/>
+       <rect width="6" height="6" stroke="none" fill="yellow" x="47" y="70"/>
+       	<path d="M 50 70 0 66 50 76"  stroke="red" fill="yellow"/>	       	
+       	</symbol>
+	</defs>
+	<g transform="translate(100,40)">
+		<line x1="10" y1="10" x2="10" y2="200" style="stroke:black;stroke-width:1;marker-start:url(#myStartArrow);"/>
+		<line x1="10" y1="105" x2="200" y2="105" style="stroke:black;stroke-width:1;marker-end:url(#myEndArrow);"/>
+		<text x="-20" y="110">(0,0)</text>
+		<polygon points="100 35 150 55 120 85 80 85 50 55" fill="none" stroke="black"/>
+		<text x="100" y="35">(90,70)</text>
+		<text x="150" y="58">(140,50)</text>
+		<text x="120" y="92">(110,20)</text>
+		<text x="38" y="92">(70,20)</text>
+		<text x="10" y="58">(40,50)</text>
+		<text x="30" y="230">传统坐标系中的任一五边形P</text>
+		<text x="200" y="105" font-size="16">x</text>
+		<text x="11" y="10" font-size="16">y</text>
+	</g>
+	<g transform="translate(350,40)">
+	   <rect width="190" height="95" x="10" y="105" fill="lightskyblue" stroke="none" opacity="0.2" />
+		<line x1="10" y1="10" x2="10" y2="200" style="stroke:black;stroke-width:1;marker-end:url(#myEndArrow);"/>
+		<line x1="10" y1="105" x2="200" y2="105" style="stroke:black;stroke-width:1;marker-end:url(#myEndArrow);"/>
+		<line x1="10" y1="10" x2="10" y2="200" style="stroke:red;stroke-width:1;marker-start:url(#myStartArrow1);" stroke-dashoffset="0" stroke-dasharray="5"/>
+		<line x1="10" y1="200" x2="200" y2="200" style="stroke:red;stroke-width:1;fill:none;marker-end:url(#myEndArrow1);" stroke-dashoffset="0" stroke-dasharray="5"/>
+		<text x="-20" y="110">(0,0)</text>
+		<text x="-20" y="205" fill="red">(0,0)</text>
+		<polygon points="100 175 150 155 120 125 80 125 50 155" fill="none" stroke="black"/>
+		<text x="80" y="185">(90,70)</text>
+		<text x="150" y="158">(140,50)</text>
+		<text x="120" y="125">(110,20)</text>
+		<text x="38" y="125">(70,20)</text>
+		<text x="10" y="158">(40,50)</text>
+		<g transform="translate(0,210) scale(1,-1)">
+		<polygon points="100 175 150 155 120 125 80 125 50 155" fill="none" stroke="red"/> 
+		</g>
+		<g style="fill:red">
+		<text x="100" y="35">(90,70)</text>
+		<text x="147" y="52">(140,50)</text>
+		<text x="120" y="92">(110,20)</text>
+		<text x="33" y="92">(70,20)</text>
+		<text x="10" y="52">(40,50)</text></g>
+       	<g transform="translate(0,305) scale(1,-1)">
+		<polygon points="100 175 150 155 120 125 80 125 50 155" fill="none" stroke="blue"/> 
+		</g>
+		<g transform="translate(0,95)" style="fill:blue">
+		<text x="79" y="33">(90,70)</text>
+		<text x="147" y="52">(140,50)</text>
+		<text x="120" y="92">(110,20)</text>
+		<text x="37" y="92">(70,20)</text>
+		<text x="10" y="52">(40,50)</text></g>
+		<text x="200" y="105" font-size="16">x</text>
+		<text x="11" y="200" font-size="16">y</text>
+		<text x="30" y="230">P在SVG坐标系中的显示效果</text>
+	</g>
+<use xlink:href="#hint1" x="445" y="-42"/>
+<text x="497" y="35" font-family="SimSun" font-size="10" fill="black">P经过scale(1,-1)</text>
+<text x="497" y="50" font-family="SimSun" font-size="10" fill="black">变换的效果</text>
+<g transform="translate(-10,-2)">
+<use xlink:href="#hint2" x="495" y="140"/>
+<text x="548" y="215" font-family="SimSun" font-size="10" fill="black">P经过scale(1,-1),tran</text>
+<text x="548" y="230" font-family="SimSun" font-size="10" fill="black">slate(0,105)变换的效果</text>
+<text x="548" y="245" font-family="SimSun" font-size="10" fill="black"></text></g>
+</svg>

@@ -1,0 +1,47 @@
+<HTML>
+	<HEAD>
+		<script language="Javascript">
+			
+
+			function test_XPATH(thisform){
+			  var oXmlDom = new ActiveXObject("Microsoft.XMLDOM");
+			  oXmlDom.async = false;
+			  
+			  strMessage="";
+			  
+			  if(!oXmlDom.load(thisform.TARGET.value)){
+			  	strMessage=strMessage+"<BR>错误代码："+oXmlDom.parseError.errorCode;
+					strMessage=strMessage+"<BR>错误原因："+oXmlDom.parseError.reason;
+			  }else{
+			  	oXmlDom.async = false;
+					path=thisform.text2.value;
+					var nodes=oXmlDom.documentElement.selectNodes(path);
+					
+					for (i=0;i<nodes.length;i++)
+			  	{
+			  		strMessage=strMessage+nodes[i].xml+"\r\n";
+			  	}
+			  }
+			  var oDIV = document.getElementById('message');
+			  oDIV.innerHTML=strMessage;
+			
+				var xml = document.createTextNode(strMessage);
+        oDIV.appendChild(xml);  
+
+     }
+		</script>
+		
+	</HEAD>
+	<BODY>
+		<CENTER>
+			<H2>测试XPATH</H2><HR>
+				<form id="XMLFILE">
+					请选择XML文档:<INPUT NAME="TARGET" TYPE="FILE"><BR>
+					请输入XPATH路径表达式:<INPUT	NAME="text2" TYPE="TEXT">
+					<BR><BR>
+					<INPUT type="BUTTON" value="查看XPATH查询结果" onclick="test_XPATH(this.form)">
+				</form>
+		</CENTER>
+		<FONT COLOR="RED"><DIV id="message"></DIV></FONT>
+	</BODY>
+</HTML>

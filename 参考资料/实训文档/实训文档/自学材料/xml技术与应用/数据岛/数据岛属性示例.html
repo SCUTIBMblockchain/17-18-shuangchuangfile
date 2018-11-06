@@ -1,0 +1,36 @@
+﻿<html>
+	<head>
+		<title>数据岛属性</title>
+	</head>
+	<body>
+		<XML id="personsDSO" src="persons.xml"/>
+		<center>
+			<H2>数据岛属性示例</H2>
+			<HR>
+			<table border="1" datasrc="#personsDSO">
+				<caption align=top>世界名人列表</CAPTION>
+				<thead>
+					<TR bgcolor="#008FFF">
+						<TH align="center">姓名</TH>
+						<TH align="center">简介</TH>
+						<TH align="center">编辑日期</TH>
+					</TR>
+				</thead>
+				<TR>
+					<TD bgcolor="#FFF800">
+						<SPAN datasrc="#personsDSO" datafld="Name">
+						</SPAN>
+					</TD>
+					<TD bgcolor="#FFF800">
+						<SPAN datasrc="#personsDSO" datafld="Description">
+						</SPAN>
+					</TD>
+					<TD bgcolor="#FFF800">
+						<SPAN datasrc="#personsDSO" datafld="edate">
+						</SPAN>
+					</TD>
+				</TR>
+			</table>
+		</center>			
+	</body>
+</html>

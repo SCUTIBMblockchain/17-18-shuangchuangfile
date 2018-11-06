@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xslchoose.xslt"?>
+<orders>
+   <order>
+      <total>9</total>
+   </order>
+   <order>
+      <total>19</total>
+   </order>
+   <order>
+      <total>29</total>
+   </order>
+</orders>
+

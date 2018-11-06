@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="copy_copyof.xslt"?>
+<Companies>
+    <Company>
+        <Name>Acme</Name>
+        <Person>
+            <Name>Dave</Name>
+            <Phone>123</Phone>
+        </Person>
+    </Company>
+</Companies>

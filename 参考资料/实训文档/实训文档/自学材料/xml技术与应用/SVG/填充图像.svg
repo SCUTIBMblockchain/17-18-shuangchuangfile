@@ -1,0 +1,21 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" 
+  "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+  <desc>Patterns</desc>
+  <defs>
+      <pattern id="notes" x="0" y="0" width="50" height="75" 
+               patternTransform="rotate(15)" 
+               patternUnits="userSpaceOnUse">
+         <ellipse cx="10" cy="30" rx="10" ry="5"/>
+         <line x1="20" y1="30" x2="20" y2="0" 
+               stroke-width="3" stroke="black"/>
+         <line x1="20" y1="0" x2="30" y2="5" 
+               stroke-width="3" stroke="black"/>
+      </pattern>
+  </defs>
+  <g>
+     <ellipse cx="175" cy="100" rx="125" ry="60" 
+              fill="url(#notes)" stroke="black" stroke-width="5"/>
+  </g>
+</svg>

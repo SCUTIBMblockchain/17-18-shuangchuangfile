@@ -1,0 +1,29 @@
+CD{
+	display:block;
+	}
+CDtitle{
+	display:block;
+	color:#0066cc;
+	font-family:ËÎÌו;
+	font-size:24pt;
+	font-weight:bold;
+	text-align:center;
+	}
+songer{
+	display:block;
+	font-family:÷ÚÌו,Arial,Tahoma;
+	color:coral;
+	font-size:16pt;
+	font-weight:bold;
+	text-align:center;
+	}
+song{
+	display:block;
+	color:#00ffcc;
+	text-indent:2cm;
+	font-family:ËÎÌו;
+	font-size:14pt;
+	font-height:1.5cm;
+	margin-left:10%
+	margin-right:15%;
+	}

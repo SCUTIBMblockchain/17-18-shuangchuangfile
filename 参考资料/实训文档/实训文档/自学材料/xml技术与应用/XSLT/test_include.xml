@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="test_import.xslt"?>
+	<Persons>
+		<Person>
+			<FirstName>Jill</FirstName>
+			<LastName>Harper</LastName>
+		</Person>
+		<Person>
+			<FirstName>Claire</FirstName>
+			<LastName>Vogue</LastName>
+		</Person>
+		<Person>
+			<FirstName>Paul</FirstName>
+			<LastName>Cathedral</LastName>
+		</Person>
+	</Persons>

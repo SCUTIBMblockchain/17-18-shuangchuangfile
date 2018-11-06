@@ -1,0 +1,51 @@
+﻿<HTML>
+	<HEAD>
+		<script language="Javascript">
+			
+			function createAttrNode(thisform){
+			  var oXmlDom = new ActiveXObject("Microsoft.XMLDOM");
+			  oXmlDom.async = false;
+			  oXmlDom.load("student.xml");
+			  //获取class Node
+			  node=oXmlDom.getElementsByTagName("class");
+			  
+			  //添加属性节点
+				 for (i=0;i< node.length;i++)
+  			{
+
+					newatt=oXmlDom.createAttribute(thisform.text1.value);
+					newatt.nodeValue=thisform.text2.value;
+
+					node[i].setAttributeNode(newatt); 
+				}
+				
+				//保存,不能在IE浏览器使用方法
+				//oXmlDom.save("student.xml");
+				node=oXmlDom.getElementsByTagName("class")[0];
+				
+				attrNode=node.getAttributeNode(thisform.text1.value);
+				str1=attrNode.nodeName;
+				str2=attrNode.nodeValue;
+
+			  var oDIV = document.getElementById('message');
+			  strMessage="创建"+thisform.text1.value+"属性成功！"+"<BR>"+str1+":"+str2;
+			  oDIV.innerHTML=strMessage;
+     }
+     
+		</script>
+		
+	</HEAD>
+	<BODY>
+		<CENTER>
+			<H2>为student.xml创建属性</H2><HR>
+				<form id="XMLFILE">
+					请输入需创建的属性节点名:<INPUT	NAME="text1" TYPE="TEXT"><BR>
+					请输入需创建的属性节点值:<INPUT	NAME="text2" TYPE="TEXT">
+					<BR><BR>
+					<INPUT type="BUTTON" value="创建属性" onclick="createAttrNode(this.form)">
+				</form>
+		
+			<FONT COLOR="RED"><DIV id="message"></DIV></FONT>
+		</CENTER>
+	</BODY>
+</HTML>
